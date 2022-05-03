@@ -1,5 +1,8 @@
+import 'dotenv/config';
 
-export const TVA = 0.2 ;
+const { TVA : TVA_ENV } =  process.env;
+
+export const TVA = TVA_ENV ;
 
 export function priceTTC( priceHT ){
 
