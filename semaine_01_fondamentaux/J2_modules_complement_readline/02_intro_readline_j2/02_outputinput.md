@@ -127,9 +127,9 @@ const rl = readline.createInterface({
 
 Cet exercice est libre, vous devez implémenter le jeu Chifoumi avec les connaissances que nous venons d'aborder. Utilisez readline.
 
-Le jeu du Chifoumi se fera avec deux joueurs créer de manière automatique, par le script.
+Le jeu du Chifoumi se fera avec deux joueurs vous et l'ordinateur, pour ce point, vous ferez un script qui déterminera un choix aléatoire pour continuer la partie.
 
-Affichez une fois le jeu terminé les points gagnés par chaque joueur ainsi que le gagnant de la partie.
+Affichez une fois le jeu terminé les points gagnés par chaque joueur ainsi que le gagnant de la partie. Pour terminer une partie créez un compteur de jeu.
 
 ### Partie optionnelle Challenge
 
