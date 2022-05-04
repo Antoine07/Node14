@@ -203,7 +203,7 @@ http.createServer(function (req, res) {
 
 ## 02 Exercice search JSON file
 
-Créez un projet et récupérez le fichier Data/ dans la partie Exercices du cours. 
+Créez un projet et récupérez les fichiers dans le dossier Data/ dans la partie Exercices du cours. 
 
 Nous allons créer une petite API qui retournera des données au format JSON.
 
@@ -211,6 +211,15 @@ Implémentez les routes suivantes :
 
 - all
 
-- /search/[Name_user] pour récupérer les informations liés à un utilisateur
+- /search/[Name_user] pour récupérer les informations liés à un utilisateur.
 
-Gérez également les erreurs, si un user n'existe pas alors on retournera une page 404.
+Gérez également les erreurs, si un user n'existe pas, alors on retournera une page 404.
+
+Remarques : si vous souhaitez utiliser la constante __dirname dans vos scripts avec les imports vous devez écrire le code suivant.
+
+```js
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url) );
+```
