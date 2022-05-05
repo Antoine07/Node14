@@ -2,19 +2,20 @@
 
 Nous allons essayer de gérer maintenant le rendu d'une page HTML avec un fichier css et des images en utilisant, uniquement pour l'instant, un serveur Node natif.
 
-Vous allez dans cet exercice apprendre à mieux gérer un serveur Node.js natif, avec des fichiers statiques et des données de type Post.
+Vous allez dans cet exercice apprendre à mieux gérer un serveur Node.js natif, avec des fichiers statiques et des données de type POST/GET.
 
-Vous n'avez pas la possibilité de passer des données aux vues de manière dymanique pour l'instant.
+Vous avez la possibilité de passer des données à la vue, utilisez pour se faire le moteur de templating EJS.
 
 ## 01 Exercice add users TP
 
 1. Définissez l'arborescence suivante pour gérer les différents assets et vues de l'exercice.
 
-Placez le bootstrap.min.css dans le fichier styles.css, nous allons gérer deux pages : la page d'accueil qui contiendra un formulaire et une page qui ne sera pas physiquement un fichier, mais qui sera gérée dans le code du serveur lui-même.
+Placez le bootstrap.min.css dans le fichier styles.css, nous allons gérer deux pages : la page d'accueil qui contiendra un formulaire et une page student qui affichera le détail d'un student.
 
 ```text
 view/
-    home.html <-- formulaire
+    home.ejs <-- formulaire
+    student.ejs <-- affiche le détails d'un student.
 assets/
     css/
         bootstrap.min.css  <-- voir la gestion des css dans les questions ci-dessous
@@ -23,7 +24,7 @@ server.js
 
 2. Installez le projet comme d'habitude.
 
-3. Les données, placez les dans le fichier server.js
+3. Les données, placez les dans le fichier server.js, pensez à organiser votre code.
 
 ```js
 const students = [
@@ -32,9 +33,9 @@ const students = [
 ];
 ```
 
-4. Mettre la page principale en place avec les liens 
+4. Mettre la page principale en place avec les liens, découpez les vues partiels comme dans les exercices précédents.
 
-Voici le code de la page principale à mettre dans le fichier home.html. Vous devez également lire son contenu et le renvoyer au client.
+Voici le code de la page principale à mettre dans le fichier home.ejs. Vous devez également lire son contenu et le renvoyer au client.
 
 4. Vous allez maintenant créez le formulaire permettant d'insérer un nouvel utilisateur. Utilisez l'exemple de code ci-dessous, ne cherchez pas pour l'instant à gérer les CSS, nous le ferons plus bas (question 5).
 
@@ -131,3 +132,15 @@ if (req.method === 'POST') {
 7. Gestion des images
 
 Vous allez maintenant gérer les images dans ce projet. Modifiez les données et ajoutez un avatar pour chaque utilisateur.
+
+## Redirection
+
+Pour rediriger vers une page spécifique on écrira dans notre serveur :
+
+```js
+
+res.writeHead(301, { 'Location' : '/' });
+
+res.end();
+
+```
