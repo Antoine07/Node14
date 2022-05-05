@@ -1,0 +1,6 @@
+<%- include('partials/header'); -%>
+<div class="container">
+    <h1>Hello EJS</h1>
+    <%- include('partials/student', { ...student, avg, single : true }); %>
+</div>
+<%- include('partials/footer'); -%>

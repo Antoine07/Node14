@@ -1,0 +1,11 @@
+<%- include('partials/header'); -%>
+<div class="container">
+    <h1>Hello EJS</h1>
+   
+    <ul>
+        <% students.map(({id, name, notes }) => {  %>
+          <%- include('partials/student', {id,  name, notes, single : false}); %>
+        <% }); %>
+      </ul>
+</div>
+<%- include('partials/footer'); -%>

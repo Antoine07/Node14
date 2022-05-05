@@ -1,0 +1,22 @@
+
+<% if(single) { %>
+
+    <ul>
+        <li>
+            <%= name %>
+            <%= address %>
+            <%= avg %>
+        </li>
+    </ul>
+
+
+<% } else { %> 
+<li>
+    <a href="/student/<%= id %>?name=<%= name %>">
+        <strong>
+            <%= name %>
+        </strong>
+    </a>
+</li>
+
+<% } %>
