@@ -128,3 +128,15 @@ if (req.method === 'POST') {
     });
 }
 ```
+
+## Redirection
+
+Pour rediriger vers une page spécifique on écrira dans notre serveur :
+
+```js
+
+res.writeHead(301, { 'Location' : '/' });
+
+res.end();
+
+```
