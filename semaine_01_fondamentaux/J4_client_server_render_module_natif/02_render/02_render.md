@@ -127,3 +127,7 @@ if (req.method === 'POST') {
     });
 }
 ```
+
+7. Gestion des images
+
+Vous allez maintenant gérer les images dans ce projet. Modifiez les données et ajoutez un avatar pour chaque utilisateur.
