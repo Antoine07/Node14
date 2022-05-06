@@ -1,0 +1,25 @@
+<form action="/add" method="POST">
+    <div class="form-group">
+        <label>Name
+            <input class="form-control" name="name" type="text" value="<%= message?.old ? message.old.name : '' %>" />
+            <% if(message?.old  &&  message.old.name === '')  { %>
+                <div class="alert alert-danger" role="alert" >Le champ name est obligatoire</div>
+            <% } %>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Age
+            <input class="form-control" name="age" type="text" value="<%= message?.old ? message.old.age : '' %>" />
+            <% if(message?.old  &&  message.old.age === '')  { %>
+                <div class="alert alert-danger" role="alert" >Le champ age est obligatoire</div>
+            <% } %>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>Avatar
+            <input class="form-control" name="avatar" type="file" />
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
