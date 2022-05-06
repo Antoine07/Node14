@@ -2,6 +2,9 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
+      <% if ( message && message.type === 'Ok' )  { %>
+        <p class="alert alert-success"><%= message.message %></p>
+      <% } %>
       <%- include('partials/add', { message }) %>
     </div>
     <div class="col-4">

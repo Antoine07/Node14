@@ -19,7 +19,7 @@ export function avg(notes){
   return null;
 }
 
-
+// On ne l'utilise plus car on a un module, formidable, qui parse maintenant les données POST
 export function parser(body){
   // "name=Harry+Potter+XII&age=12"
   // [ [ 'name', 'Harry Potter XII' ], [ 'age', '12' ] ]
@@ -37,7 +37,7 @@ export function parser(body){
   return struct;
 }
 
-export function errorData({message, old, type}) {
+export function showMessage({message, old, type}) {
 
   return ({
     message, type, old

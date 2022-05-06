@@ -1,13 +1,13 @@
 import http from "http";
-import { readFileSync } from "fs";
+import { readFileSync, renameSync, rename } from "fs";
 import { dirname } from "path";
 import url, { fileURLToPath } from "url";
 import ejs from "ejs";
-import formidable  from 'formidable';
+import formidable from "formidable";
 
 import "dotenv/config";
 
-import { error404, parser, errorData } from "./src/utils.js";
+import { error404, parser, showMessage } from "./src/utils.js";
 import { students } from "./Data/students.js";
 
 // import { s, error404, avg } from "./src/utils.js";
@@ -21,7 +21,6 @@ let message = null;
 
 const server = http.createServer((req, res) => {
   const basicUrl = req.url.replace("/", "");
-
   const currentUrl = url.parse(basicUrl, true).query;
 
   if (basicUrl.includes("images")) {
@@ -72,20 +71,21 @@ const server = http.createServer((req, res) => {
   }
 
   if (basicUrl === "add" && req.method === "POST") {
-    let body = "";
-    req.on("data", (data) => {
-      body += data;
-    });
+    const form = formidable({ multiples: true });
+    message =  null;
 
-    // On écoute maintenant la fin de l'envoi des données avec la méthode on et l'attribut end
-    req.on("end", () => {
-      const student = parser(body);
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end(String(err));
 
-      console.log(body);
+        return;
+      }
 
-      const { name, age, avatar } = student;
+      const { name, age } = fields;
+
       if (name === "" || age === "") {
-        message = errorData({
+        message = showMessage({
           message: "Vous devez remplir tous les champs du formulaire",
           old: { name, age },
           type: "Error Data Form",
@@ -96,12 +96,26 @@ const server = http.createServer((req, res) => {
         return;
       }
 
-      
+      // assignation par destructuration
+      const {
+        avatar: { filepath, mimetype, originalFilename },
+      } = files;
 
-      message = null;
-      students.push({ name, age });
-      // res.writeHead(301, { Location: "/" });
+      const avatarName = `avatar${new Date().getTime()}.${mimetype.slice(6)}`;
+      renameSync(filepath, `${__dirname}/assets/images/${avatarName}`);
+
+      students.push({ name, age, avatar : avatarName });
+
+      message = showMessage({
+        message: "Merci pour vos informations",
+        old: null,
+        type: "Ok",
+      });
+
+      res.writeHead(301, { Location: "/" });
       res.end();
+
+      return;
     });
 
     return;
