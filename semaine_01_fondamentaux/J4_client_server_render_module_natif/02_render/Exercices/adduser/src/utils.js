@@ -28,7 +28,10 @@ export function parser(body){
   let struct = { };
 
   for(const s of body.split('&') ){
-    struct = { ...struct, [ s.split('=')[0] ] : s.split('=')[1].replaceAll('+', ' ').trim()  }
+
+    if(s.split('=')[0] === 'avatar') continue ;
+
+    // struct = { ...struct, [ s.split('=')[0] ] : s.split('=')[1].replaceAll('+', ' ').trim()  }
   }
 
   return struct;

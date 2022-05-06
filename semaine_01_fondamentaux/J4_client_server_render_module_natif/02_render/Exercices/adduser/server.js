@@ -3,6 +3,8 @@ import { readFileSync } from "fs";
 import { dirname } from "path";
 import url, { fileURLToPath } from "url";
 import ejs from "ejs";
+import formidable  from 'formidable';
+
 import "dotenv/config";
 
 import { error404, parser, errorData } from "./src/utils.js";
@@ -79,7 +81,9 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const student = parser(body);
 
-      const { name, age } = student;
+      console.log(body);
+
+      const { name, age, avatar } = student;
       if (name === "" || age === "") {
         message = errorData({
           message: "Vous devez remplir tous les champs du formulaire",
@@ -92,9 +96,11 @@ const server = http.createServer((req, res) => {
         return;
       }
 
+      
+
       message = null;
-      students.push(student);
-      res.writeHead(301, { Location: "/" });
+      students.push({ name, age });
+      // res.writeHead(301, { Location: "/" });
       res.end();
     });
 
